@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>CS102 Lab 1 -  Spring 2013/14</title>
+
+<meta content="en-us" http-equiv="Content-Language">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><link rel="stylesheet" type="text/css" href="../assignments.css">
+<meta name="GENERATOR" content="MSHTML 8.00.6001.18999"></head><body>
+<table class="labtitle" border="0" width="100%">
+  <tbody>
+  <tr>
+    <td>
+      <p align="left">CS102</p></td>
+    <td>
+      <p align="center"><b><font size="4">Lab No. 1&nbsp; </font></b></p></td>
+    <td>
+      <p align="right">&nbsp;Spring 2013/14</p></td></tr></tbody></table>
+<p>This lab is very simple and intended to get you back into the swing of Java 
+programming.</p>
+<p><i>Recall that the number of elements an array has must be specified when you 
+create it and cannot be changed later. However, in many situations, it is 
+impossible to know in advance how many elements will actually be needed. In such 
+cases, the only solution is to allocate an array large enough to handle the 
+worst-case scenario and to then use a subset of its elements as needed. There 
+are various ways to specify the subset, the most common of which is to store 
+data values sequentially from the beginning of the array and to maintain a count 
+of the number of such data values, thus making it easy to ensure that only those 
+elements that contain valid data are processed. The following exercises ask you 
+to create a class that can hold a varying number of integer values and to use 
+this to solve a number of simple problems.</i></p>
+<hr width="50%">
+
+<p><b>(a)</b> Design and implement a class, <i>IntBag</i>, that allows a 
+variable sized collection of integer values to be stored. Your class should have 
+two properties, an int array called <i>bag</i> that will hold the values of the 
+collection, and an int value, <i>valid</i>, that says how many of the elements 
+of <i>bag</i> actually contain values in the collection. The values themselves 
+must be stored in the first <i>valid</i> elements of bag. The class should have 
+two constructors, one that creates an empty collection (with room for up to 100 
+elements) and another that takes the desired maximum number of elements as a 
+parameter. Provide methods to <i>add</i> a value to the end of the collection, 
+and to <span style="font-style: italic;">add</span> a value at a particular index location <i>i</i> within it (moving other values "up" to make room and checking <span style="font-style: italic;">i</span> is within bounds). Also, 
+write methods to <i>remove</i> the value at a given index (moving other values back "down" the array) and another to test 
+whether the collection <i>contains</i> a given value or not. Provide a 
+<i>toString</i> method that returns a String representation of the collection, a 
+method, <i>size</i>, that returns the number of values currently in the 
+collection, and 
+finally a method that will allow you to <i>get</i> the value at location 
+<i>i</i> within the collection.<br>
+</p>
+<hr width="50%">
+
+<p><b>(b)</b> Design &amp; implement a program to efficiently compute &amp; display the 
+first 100 prime numbers by making use of the fact that a number is prime if and only if it is not divisible 
+by any prime less than itself. Use an instance of your IntBag class to keep a 
+collection of primes found so far. Initially it should contain only the number 2 
+(the first prime). Generate and check candidate values sequentially from 3 
+onwards, adding any value found to be prime to the collection until the number 
+of values in the collection is 100. Efficiently check whether a 
+candidate value is prime by attempting to divide it by each of the values in the 
+collection.</p>
+<hr width="50%">
+
+<p><b>(c)</b> Add a method, <span style="font-style: italic;">findAll</span>, to your IntBag class which returns the locations 
+(indexes) of all instances of a given value in the collection. To 
+demonstrate and test this method, write a program that presents the user with a 
+menu having the following options (which can be selected in any order by typing 
+the corresponding number):</p>
+<ol>
+  <li>Create a new empty collection with a specified maximum capacity (any 
+  previous values are lost!) 
+  </li><li>Read a set of positive values into the collection (use a negative value to indicate 
+  all the values have been entered.) 
+  </li><li>Print the collection of values. 
+  </li><li>Add a value to the collection of values at a specified location 
+  </li><li>Remove the value at a specified location from the collection of values 
+  </li><li>Read a single test value. 
+  </li><li>Compute the set of locations of the test value within the collection<i>* (see note below)</i>. 
+  </li><li>Print the set of locations. 
+  </li><li>Quit the program. </li></ol>
+<p><i>* note about menu options 6, 7 &amp; 8: 
+</i><br>Assume your collection of values contains 3, 5, 4, 
+5, 2, 7, 5, 2 <br>Given a test value of 5 (obtained using menu option 6)<br>the 
+new method, <span style="font-style: italic;">findAll</span> (called from menu option 7), should return the 
+set of locations of 5 in the collection (in this case 1, 3, 6--assuming locations are 
+numbered from zero.) If the test value were 2, the method should return 4, 7. 
+Of course, option 7 will only do the computation. To see the 
+results (the set of locations) the user must select option 8. </p>
+<hr>
+<hr>
+</body></html>

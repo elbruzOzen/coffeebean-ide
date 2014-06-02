@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Language" content="en-us">
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>CS102 - The hangman GUI</title>
+  
+
+  
+  
+  <link rel="stylesheet" type="text/css" href="../assignments.css"></head><body>
+<table class="labtitle" border="0" width="100%">
+
+  <tbody>
+    <tr>
+      <td><a href="../../cs102.html">CS102</a></td>
+      <td>
+      <p align="center"><b><font size="4">&nbsp; Labs No.05&nbsp; - The
+Hangman Game!</font></b></p>
+      </td>
+      <td>
+      <p align="right">&nbsp;Spring 2013/2014</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Lab05&nbsp;- The Hangman Game GUI &amp; MVC</h2>
+
+<p>In this lab you will create a GUI version of the hangman game. Your solution will use the MVC
+(Model-View-Controller) design pattern. This pattern separates the core
+logic of the game (the model), from the way in which the user interacts
+with it--how the user views and controls it. There are literally
+hundreds of variations of this basic theme. This lab introduces you to
+one that is (hopefully) easy to understand, yet principled and
+extensible. This should allow you to write a simple program to begin
+with and later, with minimum changes/effort, adapt it to much more
+sophisticated situations. </p>
+
+<hr style="width: 100%; height: 2px;">
+<h3>Part (a)<br>
+</h3>
+
+<p>The basic MVC pattern allows for multiple controls to update a
+model, which then tells its views to update themselves to reflect the
+model's new state. In this assignment the model (the core logic) is the
+hangman game. You are given this. It is a slightly modified
+implementation of the hangman homework many of you attempted at the
+beginning of the semester. The original design looked like this:</p>
+
+<h3>&nbsp;&nbsp;&nbsp; class Hangman</h3>
+
+<ul>
+
+  <li>constructors
+    <ul>
+      <li>+ Hangman()&nbsp; // default max 6 incorrect tries, English
+alphabet, chooses secretWord from fixed list. </li>
+    </ul>
+  </li>
+  <li>methods
+    <ul>
+      <li>+ getAllLetters() : String &nbsp; // returns the set of valid
+letters, i.e. the alphabet </li>
+      <li>+ getUsedLetters() : String&nbsp; // returns all letters so
+far tried </li>
+      <li>+ getNumOfIncorrectTries() : int &nbsp; // returns number of
+incorrect letters tried so far </li>
+      <li>+ getMaxAllowedIncorrectTries : int&nbsp; // returns maximum
+number of incorrect letters that can be tried before game over </li>
+      <li>+ getKnownSoFar() : String // returns partial word formed
+with currently known letters only </li>
+      <li>+ tryThis( letter) : int&nbsp;&nbsp; // updates knownsofar
+with letter and returns number of occurrences of letter in secretWord </li>
+      <li>+ isGameOver() : boolean&nbsp; // returns true if game is
+over, i.e. too many incorrect letters tried or complete word found </li>
+      <li>+ hasLost() : boolean&nbsp; // returns true is game over and
+word not completed </li>
+      <li>- chooseSecretWord() // private, called from constructor,
+fixed list of words from which one is chosen at random </li>
+    </ul>
+  </li>
+</ul>
+
+<p>With this design, changing the set of words, using a different way
+of choosing the secret word, using a different alphabet, or changing
+the maximum number of incorrect tries, is difficult without actually
+editing the code. Before continuing, take a moment to think about what
+you would have to modify.<br>
+</p>
+
+<p>One solution--based on the Strategy design pattern--is shown below.
+We define an interface, <span style="font-style: italic;">IHangmanSetup</span>,
+which includes the set of methods that might need changing. We then
+pass an instance of a class that implements this interface to the
+constructor of our <span style="font-style: italic;">Hangman</span>
+class, and use it to initialise everything. <br>
+</p>
+
+<h3>&nbsp;&nbsp;&nbsp; interface Hangman</h3>
+
+<ul>
+
+  <li>+ int getMaxAllowedIncorrectTries();&nbsp; // usually 6 for
+normal hangman game<br>
+  </li>
+  <li>+ char getBlankChar();&nbsp;&nbsp; // char to be used in place of
+letters not yet known, usually '*'<br>
+  </li>
+  <li>+ String getCharsToPreserve();&nbsp; // set of chars preserved in
+secret word, usually just space, i.e " "<br>
+  </li>
+  <li>+ String getAllLetters();&nbsp; // alphabet, for example all
+letters in English alphabet<br>
+  </li>
+  <li>+ String chooseSecretWord();</li>
+</ul>
+
+<h3>&nbsp;&nbsp;&nbsp; class Hangman</h3>
+
+<ul>
+
+  <li>constructors
+    <ul>
+      <li>+ Hangman( IHangmanSetup)&nbsp; // uses an instance of
+IHangmanSetup to initialise the class. </li>
+    </ul>
+  </li>
+  <li>methods
+    <ul>
+      <li>+ getAllLetters() : String &nbsp; // returns the set of valid
+letters, i.e. the alphabet </li>
+      <li>+ getUsedLetters() : String&nbsp; // returns all letters so
+far tried </li>
+      <li>+ getNumOfIncorrectTries() : int &nbsp; // returns number of
+incorrect letters tried so far </li>
+      <li>+ getMaxAllowedIncorrectTries : int&nbsp; // returns maximum
+number of incorrect letters that can be tried before game over </li>
+      <li>+ getKnownSoFar() : String // returns partial word formed
+with currently known letters only </li>
+      <li>+ tryThis( char) : int&nbsp;&nbsp; // updates knownsofar with
+letter and returns number of occurrences of letter in secretWord </li>
+      <li>+ isGameOver() : boolean&nbsp; // returns true if game is
+over, i.e. too many incorrect letters tried or complete word found </li>
+      <li>+ hasLost() : boolean&nbsp; // returns true is game over and
+word not completed </li>
+      <li>+ initNewGame()&nbsp; // resets game with new secret word.<br>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="lab05.zip">Download this JCreator Project</a> and extract
+it into your working folder for lab05. Note that it contains three
+projects: Hangman, ConsoleHangman and GUIHangman. The Hangman project
+containsthe <span style="font-style: italic;">IHangmanSetup</span>
+interface and <span style="font-style: italic;">Hangman</span> class,
+both of which are in a package called <span style="font-style: italic;">cs102</span>.
+Only
+the Java class files are made included, not the source code. Ignore the
+GUIHangman project for now, your first task is to complete the
+ConsoleHangman project. Edit its main method so it creates an instance
+of the Hangman class, prints the
+game status (knownsofar), then allows the user to play the game by
+repeatedly entering a letter and again printing the game's status. When
+the game is over, print an appropriate message (win/lose).</p>
+
+<p style="margin-left: 40px;">Note: you will need to include the class
+files from the Hangman project into the ConsoleHangman project. Do this
+as follows...</p>
+
+<p style="margin-left: 40px;"><span style="text-decoration: underline;">How
+to include another JCreator project in the current build</span> (e.g.
+cs102!)<br>
+In JCreator, go to the Project-ProjectSettings-RequiredLibraries tab.
+It says cs102 there, but probably shows it in red to indicate it can't
+find it! Select it, then click Edit, then Add Path... and browse to the
+folder -within the Hangman project- that <span style="text-decoration: underline; font-style: italic;">contains the
+cs102 folder</span>, (i.e. ...\lab05\Hangman\classes).
+Click Ok. Next select the old path and Delete it. Press Ok (cs102
+should no longer be red). Ensure the checkbox is ticked, then press Ok
+again to return to the main JCreator window. Hopefully, the project
+will compile nicely now.<br>
+</p>
+
+<p><a href="Lab05_Hangman.zip"><br>
+</a></p>
+
+<hr style="width: 100%; height: 2px;"><br>
+
+<h3>Part (b)<br>
+</h3>
+
+<p>The next task is to associate a view with the model and have the
+model tell the view to update itself whenever it is changed. You
+already know the advantages of Java interfaces, so rather than fixing
+the view type, you define an interface, <span class="filename">IHangmanView</span>,
+which has a single method <span class="filename">updateView( Hangman)</span>
+whose parameter allows the view to access the Hangman model, if
+necessary. The ConsoleHangman project includes this interface. <br>
+</p>
+
+<p>The next step is to modify the model so it updates the view(s)
+whenever its state changes. Since you don't have the code for the model
+(the <span style="font-style: italic;">cs102.Hangman</span> class),
+all you can do is subclass it. <span style="font-weight: bold;">Create
+this new subclass, calling it </span><span style="font-weight: bold;" class="filename">HangmanModel</span>. It should have a
+<span class="filename">IHangmanView</span> property, and provide a
+method
+<span class="filename"> addView( IHangmanView)</span> that sets the
+view, plus another method, <span class="filename">update()</span>,
+that calls the view's <span style="font-style: italic;">updateView</span>
+method. Finally, it should override any methods that affect the model's
+state, such that they not only perform as before, but afterwards call <span style="font-style: italic;">update()</span> to tell the view to update
+itself. In the case of the Hangman game, only the <span style="font-style: italic;">tryThis</span> &amp; <span style="font-style: italic;">initNewGame</span> methods change its
+state and so need overriding.</p>
+
+You will need a view, so <span style="font-weight: bold;">write a new
+class </span><span style="font-style: italic; font-weight: bold;">ConsoleHangmanView</span>
+that implements <span style="font-style: italic;">IHangmanView</span>
+such that--when its <span style="font-style: italic;">updateView(Hangman)</span>
+method is called--it prints out the status of the Hangman game on the
+console.
+<br>
+
+<br>
+
+Finally, make a copy of your main method from part (a), so you can
+refer back to it if necessary, then modify the original such that it
+uses an instance of <span style="font-style: italic;">HangmanModel</span>
+(instead of <span style="font-style: italic;">Hangman</span>) and adds
+an instance of your <span style="font-style: italic;">ConsoleHangmanView</span>
+to it as the view. Make your program function much the same as
+it did before, but now each time the user enters a letter, it simply
+calls <span style="font-style: italic;">tryThis(letter)</span>. This,
+then, automatically causes the view to display the game's status on the
+console--using the ConsoleHangmanView object.<br>
+
+<hr style="width: 100%; height: 2px;"><br>
+
+<h3>Part (c)</h3>
+
+The last task is to modify your <span style="font-style: italic;">HangmanModel</span>
+class so that it can support any number of views. Change the <span style="font-style: italic;">view</span> property to an <span style="font-style: italic;">ArrayList</span> of <span style="font-style: italic;">IHangmanView</span>'s, called <span style="font-style: italic;">views</span>. Initialise <span style="font-style: italic;">views</span> in the constructor. Modify <span style="font-style: italic;">addView</span> appropriately and modify <span style="font-style: italic;">update()</span> so that it calls the <span style="font-style: italic;">updateView</span> method of each <span style="font-style: italic;">IHangmanView</span> instance in the <span style="font-style: italic;">ArrayList</span>.<br>
+
+<br>
+
+Demonstrate your new multi-view <span style="font-style: italic;">HangmanModel</span>
+class by adding another <span style="font-style: italic;">ConsoleHangmanView</span>
+to the <span style="font-style: italic;">Hangman</span> instance in
+your main method.<br>
+
+<br>
+
+<span style="font-weight: bold;">Extra:</span> Have the game use your
+own set of words (hint, write a new class that implements <span style="font-style: italic;">IHangmanSetup</span>).<br>
+
+<hr style="width: 100%; height: 2px;"><br>
+
+<div style="text-align: center;"><a style="font-style: italic;" href="index2.html"><span style="font-weight: bold;">Click here to
+continue</span> to the second half of the assignment <br>
+where you will
+create the GUI version of Hangman...</a><br>
+</div>
+
+<hr style="width: 100%; height: 2px;">
+<hr style="width: 100%; height: 2px;"><br>
+
+<br>
+</body></html>

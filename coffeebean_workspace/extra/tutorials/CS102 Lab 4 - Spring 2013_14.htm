@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
+
+
+  
+  <meta http-equiv="Content-Language" content="en-us">
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>CS102 - No time for Games!</title>
+  
+
+  
+  
+  <link rel="stylesheet" type="text/css" href="../assignments.css"></head><body>
+<table class="labtitle" border="0" width="100%">
+
+  <tbody><tr>
+    <td><a href="../../cs102.html">CS102</a></td>
+    <td>
+      <p align="center"><b><font size="4">&nbsp; Lab No.4&nbsp; - No time for Games!<br>
+</font></b></p></td>
+    <td>
+      <p align="right">&nbsp;Spring 2013/2014</p></td>
+  </tr>
+</tbody>
+</table>
+
+
+<p align="left">&nbsp;</p>
+
+<h2 align="left">(a) Pot Luck</h2>
+
+<p>Design and implement a GUI application that presents a game based on
+a 5 by 5 matrix of buttons. One of the buttons (selected at random)
+"hides" the prize. A status bar at the top of the window shows the
+number of guesses. When the prize button is pressed, the status bar
+shows "You got it in <i>x</i> attempts!"</p>
+
+<h2>&nbsp;</h2>
+
+<h2>(b)&nbsp;- The Noverlap Game</h2>
+
+<p>You are asked to produce a simple game based on the shapes hierarchy
+you created in Lab03. </p>
+
+<p>The game places randomly sized circles at random locations on the
+screen, one by one. Clicking on a circle removes it from the screen.
+The game consist of five rounds. During each round ten circles are
+added to the display. Points are awarded at the end of each round, one
+point for each circle that is not overlapped by any other circle. The
+game gets progressively faster with each round.</p>
+
+<p>You can try playing the game by downloading this <a href="Noverlap.jar">
+Noverlap.jar</a> file and running it (by double-clicking on the file or
+typing "<span class="reddish">java -classpath Noverlap.jar Lab04</span>").
+The maximum possible score is 150 points, but a score of 50 or more is
+probably very good (doing nothing usually gets you about 10 points).
+Don't spend too much time playing though, the real fun is in building
+it!</p>
+
+<h3>Building the game:</h3>
+
+<p>Create a new JCreator project, Lab04b, and copy all your files from
+Lab03 part (a), into it. This should include Shape, Circle, Rectangle,
+Square, Locatable, Selectable, and ShapeContainer. </p>
+
+<p>Create a new interface, <span class="reddish">Drawable</span>,
+which includes a single abstract method:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="reddish">void draw( Graphics g);</span></p>
+
+<p>Make <span class="reddish">Circle </span>and <span class="reddish">
+ShapeContainer </span>implement <span class="reddish">Drawable</span>.
+Check your textbook and the Java API for examples. Note: you can also
+do Rectangle &amp; Square, but they are not needed for the current
+game. </p>
+
+<p>Create a new subclass of <span class="reddish">JPanel</span>,
+called <span class="reddish">ShapesCanvas</span>. It will simply
+display the shapes in the <span class="reddish">ShapeContainer
+</span>that is passed to its constructor (by telling the ShapeContainer
+to draw itself). It should have a preferred size of 500 by 500. </p>
+
+<p>Make sure all this is working by creating a ShapeContainer with a
+few Circle objects in it, creating a ShapesCanvas to display this
+ShapeContainer, and adding it to an instance of JFrame.</p>
+
+<p>The <span class="reddish">ShapesGame </span>class is also based
+on
+<span class="reddish">JPanel</span>. It includes an instance of your
+<span class="reddish">ShapesCanvas</span>, along with a <span class="reddish">
+JLabel </span>at the bottom to show the points and a <span class="reddish">
+JProgressBar </span>on the right to show the round number. You should
+be able to add one or more instances of <span class="reddish">ShapesGame</span>
+to a <span class="reddish">JFrame
+</span>or to a <span class="reddish">JApplet</span>..</p>
+
+<p>Having got the basic GUI done, you can start wiring up the event
+handling mechanism.</p>
+
+<p>Add a <span class="reddish">MouseListener </span>to your
+<span class="reddish">ShapesCanvas </span>such that, <span class="reddish">
+mouseReleased </span>first selects the <span class="reddish">Shape </span>at
+the location of the mouse click (using the <span class="reddish">Selectable
+</span>interface methods), then calls your ShapeContainer's
+<span class="reddish">removeSelected()</span> method to actually
+remove it from the collection. Note that you will have to repaint the
+canvas to "see" the effect.</p>
+
+<p>Last, but not least, add a (java.swing) <span class="reddish">Timer
+</span>object to your <span class="reddish">ShapesGame </span>class,
+that triggers an ActionEvent every 500 milliseconds. Have its event
+handler add a new (randomly sized and positioned) <span class="reddish">Circle
+</span>to the collection. </p>
+
+<p>Make sure this works too, then simply add the remaining "bells 'n
+whistles". Have a round counter that stops the game after five rounds
+and a progress counter that counts the number of circles added this
+round (maximum ten). Update the JProgressbar using the round counter
+value. Update the JLabel with the points scored (you will need to write
+a method that actually computes the number of non-overlapping circles
+and adds that to the points scored). See if you can change the
+background colour of the <span class="reddish">ShapesCanvas</span>
+using the progress counter; add beeps each time a circle is added; and
+add a slight pause between rounds.<br>
+</p>
+
+<p>Stopping the game requires you stop the Timer and make sure mouse
+clicks no longer remove circles from the screen.</p>
+
+<p>Congratulations, you should now have a simple interactive game. Of
+course, it could be improved a lot. Use your imagination and show us
+what you can do!</p>
+
+<hr>
+<hr>
+</body></html>

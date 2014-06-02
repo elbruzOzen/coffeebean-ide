@@ -1,0 +1,76 @@
+CoffeeBean IDE V1 Help Document - 12.05.2014
+
+------------------------------------------------------------------------------------------------------
+
+Setting Up CoffeeBean
+
+To execute the program and full functionality, you need to follow the following steps:
+
+-Please install the latest version of Java(JRE) on your computer.
+-Make sure you are using a recent version of Windows.
+-Please install the latest version of Java Software Development Kit(JDK). 
+-Open Command Manager( cmd.exe) and execute "java -version" then "javac -version"
+-Make sure you have received proper version information for both commands.
+-If these commands are not recognized, add JDK and JRE directories into your system "path" variable.
+
+For more detailed information:
+http://docs.oracle.com/javase/tutorial/essential/environment/paths.html
+
+-Try these commands again and make sure you have received proper version information for both commands.
+
+Now you are ready to begin.
+
+-----------------------------------------------------------------------------------------------------
+
+Simple algorithm for writing code
+
+-Write the code
+-Save your file by using File/Save option.(Or File/Save All)
+-Build your file by using File/Build option.(Or File/Build All)
+-Correct all problems in your code by checking your console
+-Make sure your program files are built successfully.
+-Select the file which contains main method
+-Click File/Run to execute your program.
+
+Alternatively, try shortcut buttons.Explanation is given as a tool text tip on button.
+
+-----------------------------------------------------------------------------------------------------
+
+To open the files in your directory
+
+-Click File/Open
+-Navigate through your file
+-Click OK
+
+Caution: Be sure that all of your Java files and Byte Code Files are in the same directory with your the Jar File
+with your program. This will make it easy to control the project and enable JVM to execute all files properly.
+
+-----------------------------------------------------------------------------------------------------
+
+To open tutorials
+
+-Open and select the tutorial on the Tutorial Box
+-Follow the tutorial and go to the other parts
+
+--------------------------------------------------------------------------------------------------------
+
+For Java Documentation click Java Doc Button. If you have an internet connection, new browser will be navigated to
+on-line documentation.
+
+For search your problems, choose your engine, enter your keyword or problem on search field and click "Search" button, alternatively
+hit enter.
+
+Note: Engines are kept in a file under extra/config/engine.dat
+-Do not harm this file unnecessarily, you lost your engines except default one. (File is created by default again).
+-By following format, you can add your own engines( Name + newLine + address ). Do not distort format or create empty lines.
+
+---------------------------------------------------------------------------------------------------------
+
+CoffeeBean remembers your EditorFont and BackgroundColor selections. They are kept under extra/config/font.dat and 
+under extra/config/color.dat files
+
+! Preferably, do not try to modify them, it is useless. These funny symbols are for computers to understand, not for humans. If you want to restore
+factory settings, simply delete files and open CoffeeBean again.
+
+----------------------------------------------------------------------------------------------------------------
+

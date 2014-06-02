@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
+
+
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document"><title>CS102</title>
+
+<link rel="stylesheet" type="text/css" href="../assignments.css">
+<style type="text/css">
+.reddish {
+	color: #800000;
+	font-style: italic;
+}
+</style></head><body>
+
+<table class="labtitle" border="0" width="100%">
+  <tbody><tr>
+    <td><a href="../../cs102.html">CS102</a></td>
+    <td>
+      <p align="center"><b><font size="4">&nbsp; Labs No.3&nbsp; - Get into 
+		Shape</font></b></p></td>
+    <td>
+      <p align="right">&nbsp;Spring 2013/2014</p></td>
+  </tr>
+</tbody></table>
+
+
+<p>Design, implement and explore simple class hierarchies, abstract classes&nbsp;and 
+interfaces.<br>
+<i>Note: this assignment has nothing to do with drawing graphics in Java, 
+everything is done on the console as usual.</i></p>
+<p>Create one JCreator project for part (a) and another for part (b), both 
+within the same workspace.</p>
+<h2 style="text-decoration: underline;">(a) Shape up</h2>
+<p><b><span lang="en-gb">(1) </span></b>Design a class hierarchy to include 
+classes <i class="reddish">Shape</i>,
+<span class="reddish">
+<i>Rectangle</i></span> (with int sides, <span class="reddish">width </span>and 
+<span class="reddish">height</span>), <span class="reddish">
+<i>Circle</i></span> (with int <span class="reddish">radius </span>) and
+<span class="reddish">
+<i>Square</i></span> (with int <span class="reddish">side</span>). Shape 
+should be abstract with method <span class="reddish">double getArea()</span> and Square should inherit
+<span class="reddish">getArea()</span> from Rectangle.</p>
+<p><span style="font-weight: bold;">(2)</span> Create another class, <i>
+<span class="reddish">ShapeContainer</span>,</i> to hold a set of shapes. It 
+should have methods
+<i class="reddish">void add( Shape s) </i> and &nbsp;<i class="reddish">double getArea()</i> and
+<i class="reddish">String toString()</i>. Write a
+<span class="reddish">
+<i>ShapeTester</i></span> class with a menu that allows the user to create an empty set 
+of shapes (ShapeContainer), add as many circle and rectangle shapes to it as 
+they wish, compute &amp; print out the total surface area of the entire set of 
+shapes, and print out information about all of the shapes in the container 
+by calling the toString() method for each shape.&nbsp; Experiment.<span lang="en-gb"> 
+Try to predict what would happen when you (i) comment out the getArea() method 
+of the Circle class, and (ii) also make the Circle class abstract, before 
+finally (iii) creating an instance of the (now abstract) Circle class to add to 
+the shapes collection. Test your predictions.</span></p>
+<p align="left"><b>(3)</b> The customer is impressed with your work so far, and so 
+asks you to extend the program. They want Shapes to be locatable (i.e. to have an
+<span class="reddish">x</span>, <span class="reddish">y</span> location, and
+<span class="reddish">getX()</span>, <span class="reddish">getY()</span> and
+<span class="reddish">setLocation( x, y)</span> 
+methods). As a good designer you decide to first create a <span class="reddish">Locatable
+</span>interface with 
+these methods, then have the Shape class implement it. In this way all shapes 
+automatically become locatable.</p>
+<p align="left"><b>(4)</b> Impressed, the customer wants even more! This time they ask 
+for shapes to be <span class="reddish">Selectable</span>, so you again start by creating a Java interface, 
+having <span class="reddish">boolean getSelected()</span> and
+<span class="reddish">setSelected( boolean)</span> and <span class="reddish">Shape contains( int x, 
+int y)</span>. Unfortunately, this time--for some unknown reason--you are not allowed 
+to change the Shape class. Modify your other classes so that each shape added to 
+the ShapeContainer is Selectable. Change the toString() methods of each shape 
+class so they show whether the shape is selected or not. Add another option to 
+your ShapeTester menu that allows the user to find the first Shape that contains 
+a given x, y point and toggle its selected state. Provide another menu option 
+that removes all selected shapes from the set of&nbsp; shapes. Good design 
+practice suggests you should ask the ShapeContainer object to do the work of 
+finding the first Shape containing the given point and of removing all selected 
+shapes (rather than trying to do the work yourself in the ShapeTester class, 
+which might require knowledge of the insides of the ShapeContainer class).</p>
+<hr color="#0000ff" noshade="noshade" size="8" width="50%">
+<h2 style="text-decoration: underline;" align="left">(b) Iterating IntBags</h2>
+<p align="left">The Java API includes an interface called Iterator that is 
+designed to retrieve each of the objects from a set of objects, once and once 
+only. This allows programs to process each item in the set without being aware 
+of the underlying implementation (which means it can be changed at will without 
+affecting the client program.) Your task is to provide this interface for your 
+IntBag class (from Lab 1.) <i>Note</i>: The IntBag class was designed to store 
+primitive int types, rather than Java Object types. Since the Iterator
+<font color="#800000">next()</font> method must return an Object, you will need 
+to return the corresponding int in an Integer wrapper. Clearly, this is not an 
+entirely satisfactory solution and you might consider extending Iterator to 
+produce IntIterator, which provides an additional <font color="#800000">int 
+nextInt()</font> method.</p>
+<p align="left">There are several ways you might think of coding this problem. 
+Clearly you must have a value (say <font color="#800000">index</font>) that 
+keeps track of position of the next item to be retrieved from the IntBag 
+collection. This must be initialized to zero when an iteration begins, and be 
+incremented each time a call is made to get the next element (such call 
+returning the element at the index location within the set.) The hasNext() 
+method simply determines whether the index value is less than the number of 
+elements in the set or not. Putting this code inside the IntBag class is 
+problematic; how can index be reset to zero so that the elements can be iterated 
+through several times, and how can multiple independent iterations through the 
+set be managed?</p>
+<p align="left">A simple solution to this is to write a new class, say, <font color="#800000">IntBagIterator</font>, which implements
+<font color="#800000">Iterator</font>. This class need have only two properties;
+<font color="#800000">bag</font> (a reference to the IntBag set it is to iterate 
+through) and <font color="#800000">index</font>  (the position of the next 
+element to return from the bag.) Code this class and test it using a class, 
+TestIterators, which contains the following code,</p>
+<div align="left">
+	<blockquote>
+		<pre align="left">Iterator i, j;<br><br>i = new IntBagIterator( bag);<br><br>while ( i.hasNext() ) <br>{<br>	System.out.println( i.next() );<br>	<br>	j = new IntBagIterator( bag);<br>	// j = bag.iterator();<br>	<br>	while ( j.hasNext() )<br>	{<br>		System.out.println( "--" + j.next() );<br>	}<br>}</pre>
+	</blockquote>
+</div>
+<p>Notice that i &amp; j are of the interface type, Iterator. This is valid since 
+IntBagIterator implements Iterator and so <i>is_a</i> Iterator.</p>
+<p>Finally, add a method <font color="#800000">Iterator iterator()</font> to 
+your Intbag class. This should create an instance of IntBagIterator and return 
+it as the interface type. Test this method by uncommenting the commented line in 
+the above code and commenting out the line above it.</p>
+<p>Java's ArrayList class has a similar method that allows you to iterate 
+through its elements. 
+Interestingly, there is no (immediately obvious) class in the Java API that 
+corresponds to our IntBagIterator class. It actually has such a class, but 
+nested inside ArrayList. The curious might like to read up on nested classes and 
+perhaps even examine the Java source code for the ArrayList class to see how 
+they did it!</p>
+<hr color="#0000ff" noshade="noshade" size="8" width="50%">
+<hr color="#0000ff" noshade="noshade" size="8">
+
+</body></html>

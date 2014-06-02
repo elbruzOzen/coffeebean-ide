@@ -1,0 +1,87 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>CS102 - lab07</title>
+<link rel="stylesheet" type="text/css" href="../assignments.css">
+</head>
+
+<body>
+
+<table class="labtitle" border="0" width="100%">
+  <tr>
+    <td><a href="../../cs102.html">CS102</a></td>
+    <td>
+      <p align="center"><b><font size="4">&nbsp; Labs No.7&nbsp; - Data 
+		Structures</font></b></td>
+    <td>
+      <p align="right">&nbsp;Spring 2013/2014</td>
+  </tr>
+</table>
+
+
+<p><b>(a)&nbsp; </b>Implement the SimpleLinkedList class as specified below. 
+Write a test class that demonstrates its use, e.g. create a list, add a number 
+of strings to it, iterate over them, and remove them from the list.</p>
+<p style="margin-left: 40px">public class SimpleLinkedList implements Iterable<br>
+<br>
+&nbsp;&nbsp;&nbsp; public SimpleLinkedList()<br>
+&nbsp;&nbsp;&nbsp; public void addToHead( String item)<br>
+&nbsp;&nbsp;&nbsp; public String removeFromHead()<br>
+&nbsp;&nbsp;&nbsp; public boolean isEmpty()<br>
+&nbsp;&nbsp;&nbsp; public Iterator iterator()</p>
+<p><b>(b)</b> Using the SimpleLinkedList class, create a SimpleStack class, 
+which has <u><i>only</i></u> the standard push, pop &amp; isEmpty methods, and a constructor to 
+create an empty stack. Demonstrate your stack class by using it to evaluate 
+simple postfix expressions. The user should be able to enter the expression as a 
+String in which each character is either an operator (+ or -) or an operand (a 
+value between 0 and 9.) A postfix expression has the form &quot;firstNumber 
+secondNumber operator&quot;, e.g. &quot;48+&quot; is equivalent to the more conventional infix 
+expression 4 + 8, while &quot;85-&quot; is 8 - 5, and &quot;48+5-&quot; is 4 + 8 - 5. To evaluate 
+such an expression, create an empty stack, then for each token (character) in 
+the expression, if it is a number push it on the stack, else pop the top two 
+numbers from the stack, apply the operator to them and push the result back onto 
+the stack. After all tokens have been processed, pop the result from the stack.</p>
+<p><b>(c)</b> A HashTable offers very fast lookup of a value given a key. You are asked to 
+implement the SimpleHashTable class below, using an array of SimpleLinkedList 
+elements. Since the SimpleLinkedList only holds Strings, the data in the 
+HashTable should be stored in the form of a String having the format &quot;key<b>:</b>value&quot;. 
+For example, the key &quot;CS102&quot; and value &quot;Algorithms &amp; Programming II&quot; would be 
+stored as &quot;CS102<b>:</b>Algorithms &amp; Programming II&quot;. Write a test program to 
+demonstrate the use of your HashTable class.</p>
+<p style="margin-left: 40px">public class SimpleHashTable<br>
+<br>
+&nbsp;&nbsp;&nbsp; public SimpleHashTable( int size)<br>
+&nbsp;&nbsp;&nbsp; public void put( String key, String value)&nbsp;&nbsp; // 
+adds key-value pair only if key does not already exist.<br>
+&nbsp;&nbsp;&nbsp; public String get( String key)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+// returns the value corresponding to the given key</p>
+<hr>
+<hr>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><a name="OptionalExtras">Optional Extras...</a></h2>
+<p><b>(d)</b> Try adding more functionality to the SimpleLinkedList class, for 
+example, insert/delete anywhere, append to the end of the list, deleteAll 
+elements in the list, compare with another list, etc. </p>
+<p><b>(e)</b> Use Java's Stack class to implement the postfix calculator in part 
+(b).</p>
+<p><b>(f) </b>Implement a binary search tree class. Include preOrder, inOrder, 
+postOrder traversals, as well as methods to perform insert and search.</p>
+<p><b>(g) </b>Check out the Java Collections Framework tutorial on Oracle's 
+website.</p>
+<hr>
+<hr>
+
+</body>
+
+</html>

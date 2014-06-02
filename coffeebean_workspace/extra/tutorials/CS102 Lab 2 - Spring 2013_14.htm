@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document"><title>CS102</title>
+
+<link rel="stylesheet" type="text/css" href="../assignments.css"></head><body>
+
+<table class="labtitle" border="0" width="100%">
+  <tbody><tr>
+    <td><a href="../../cs102.html">CS102</a></td>
+    <td>
+      <p align="center"><b><font size="4">&nbsp; Labs No.2&nbsp; - Reuse in OOP</font></b></p></td>
+    <td>
+      <p align="right">&nbsp;Spring 2013/2014</p></td>
+  </tr>
+</tbody></table>
+
+
+<p>This assignment is designed to give you experience with object reuse by
+employing inheritance to extend and modify the behaviour of Java classes. You
+will use the SimpleURLReader class from the cs1 package. Create your lab02 
+JCreator project from the CS101 console template, as usual, then
+<a href="http://www.cs.bilkent.edu.tr/%7Edavid/cs101/RevisedCS1Package/cs1.jar">download 
+this cs1 package</a> (right click and save it) to a convenient location on your 
+local machine (e.g. the folder you are using for this lab assignment.) You now 
+need to add this to your project's classpath so Java can find and use it. To do 
+this, in JCreator select Project|Project_Properties from the main menu. The 
+Project_Properties dialog will open. Select the "Required Libraries" tab. Click 
+the "New" button and, in the Set_Library dialog that appears, enter the Name: as 
+"cs102" and select Add|Add_Archive. A file dialog will open; locate the cs1.jar 
+file you just downloaded &amp; click OK to close the dialog. Finally, click the 
+checkbox next to the "cs102" line in the Project_Properties dialog and click OK 
+there too.
+Note that, to complete the assignment, you do not need to know how the SimpleURLReader class works, just 
+treat it like you have been doing with <span lang="en-gb">other Java</span> classes. 
+One of 
+the key points <span lang="en-gb">of</span> this lab is to demonstrate that you can  add<span lang="en-gb"> 
+to and </span>modify <span lang="en-gb">the behaviour of an existing class,
+</span>even without having <span lang="en-gb">its</span> source code. Now that is neat!</p>
+<p><b>(a)</b> Write a test program that will read the contents of <a href="http://www.cs.bilkent.edu.tr/%7Edavid/housman.txt">this
+url</a> and print it and the number of lines it contains, on the console. To
+read the contents of a url you can use the SimpleURLReader class (see above!)
+Its constructor takes the desired url as a String, for example "http://www.cs.bilkent.edu.tr/~david/housman.txt".
+The class has only two methods: getPageContents() that returns the contents of
+the url (the webpage) as a String, and getLineCount() that returns an int
+corresponding to the number of lines read from the url.</p>
+<p><b>(b)</b> Design, implement and test a new class, MySimpleURLReader, that extends 
+the SimpleURLReader class, adding two methods to it: getURL() that returns the url 
+String used to create the SimpleURLReader object, and getName() that returns the 
+filename part of the url, that is, the part of the url following the last '/' 
+character ("housman.txt" in the previous example). Once this is 
+working, fix the bug in SimpleURLReader's getPageContents() method whereby the 
+String "null" is added to the beginning of the String it returns. Do this by 
+overriding the corresponding method in your new sub-class.</p>
+<p><b>(c)</b> A customer wants to be able to print the contents of&nbsp; <a href="http://www.cs.bilkent.edu.tr/%7Edavid/housman.htm">this
+other url</a> (an html version of the original plain text) and have it appear as
+in the part (a) without any of the html code in it! Clearly, it is necessary to
+read the contents of the url and then filter out the html code so that only the
+visible text is left. Rather than write an entirely new class from scratch, you
+realise that the MySimpleURLReader class does most of what you want and so decide
+to use it. Design, implement &amp; test a new class, HTMLFilteredReader, that
+extends MySimpleURLReader. Its getPageContents() method should return only the
+text, without the html. A new method, getUnfilteredPageContents() can be called 
+to return the original page complete with html codes. Assume that anything 
+between "&lt;" and "&gt;" is html code and should be omitted from the filtered output. 
+Solve the problem using charAt(i) and String concatenation.<br>
+</p>
+<p><b>(d)</b> The customer is impressed and immediately asks you to add a method that
+computes the overhead due to the html code (the percentage increase in size
+between the html and no-html contents.) They also want a list of the url's that
+the page links to! A little research shows that html links have the form <i><b>href="link_url".
+</b></i>Use <b>String class</b> methods (indexOf &amp; substring) to extract all of the <b><i>link_url</i></b>'s
+and put them into an ArrayList. Return this as the result of a getLinks()
+method. Add these methods by sub-classing HTMLFilteredReader in a class called
+SuperHTMLFilteredReader. Modify your test program to exercise these new
+facilities. Experiment with Java's extended type checking mechanism by calling
+the methods using variables of both HTMLFilteredReader and
+SuperHTMLFilteredReader types. Note: the previous url's do not have any html
+links in them, so try using <a href="http://www.cs.bilkent.edu.tr/%7Edavid/index.html">this
+url</a> for testing this class.</p>
+<p><b>(e)</b> Design and implement a simple menu-driven program that will maintain a 
+collection of MySimpleURLReader objects. The main menu should have&nbsp; three 
+options: (1) Enter the url of poem to add to collection, (2) List all poems in 
+the collection, and (3) Quit. Option 2 should display only the index number &amp; 
+(file) name for each of the poems. The user should then be able to enter the 
+index number of a poem to view it (and then return to the same list.) If the 
+user enters the last index number + 1 they should be returned to the main menu, 
+anything else should be ignored. In option 1, if the user enters the url of a 
+text file you should create a MySimpleURLReader object and add it to the 
+collection, whereas if they enter the url of an html file you should create an HTMLFilteredReader 
+object and add it to the collection. You should always call the getPageContents() 
+method of the corresponding object to view it from option 2. If you have done 
+everything properly, you should always see the non-html version of the poem... 
+that's neat, that's polymorphism!&nbsp; </p>
+<hr color="#0000ff" noshade="noshade" size="8" width="50%">
+<hr color="#0000ff" noshade="noshade" size="8">
+
+</body></html>
